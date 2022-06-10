@@ -1,0 +1,21 @@
+services:
+  P1_ERSapi:
+    image: 'chance562/p1-ers-api:new'
+    container_name: p1-ers
+    ports:
+      - 7465:7465
+    environment:
+      - db_url=jdbc:postgresql://database-p1.cqhd8rudluf1.us-east-1.rds.amazonaws.com:5432/postgres
+      - db_username=java_login
+      - db_password=r3vDiceRace
+  prom:
+    image: 'prom/prometheus'
+    container_name: prom
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+  graf:
+    image: 'grafana/grafana'
+    ports:
+      - 8000:3000
